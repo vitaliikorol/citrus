@@ -4,7 +4,8 @@
       <h2 class="card-title">Page wasn't found</h2>
       <div>
         <nuxt-link to="/" class="btn btn-primary">Home</nuxt-link>
-        <a @click="goBack" class="btn btn-primary">Go back</a></div>
+        <a @click="goBack" class="btn btn-primary">Go back</a>
+      </div>
     </div>
   </section>
 </template>
