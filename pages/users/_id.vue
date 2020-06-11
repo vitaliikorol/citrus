@@ -1,8 +1,12 @@
 <template>
   <section>
-    <div class="personCard" v-for="person of user">
+    <div
+      class="personCard"
+      v-for="person of user">
       <header class="personCard__header">
-        <div class="personCard__header_img_wrap">
+        <div
+          v-on:click="showDetails"
+          class="personCard__header_img_wrap">
           <img :src="person.picture.large" alt="" class="personCard__header_img">
         </div>
       </header>
@@ -14,16 +18,27 @@
         <ul class="personCard__nav_list nl">
           <li
             class="nl__item nl__item_name"
+            :class="{'active':(activeTab === name)}"
             v-on:mouseover="setView(
-              'Hi, my name is',
+              name,
                person.name.first + ' ' + person.name.last
                )"
           ></li>
-          <li class="nl__item nl__item_email" v-on:mouseover="setView('My email address is', person.email)"></li>
-          <li class="nl__item nl__item_dob" v-on:mouseover="setView('My birthday is', person.dob.date)"></li>
-          <li class="nl__item nl__item_address" v-on:mouseover="setView('My address is', person.location.street.number + ' ' + person.location.street.name)"></li>
-          <li class="nl__item nl__item_phone" v-on:mouseover="setView('My phone number is', person.phone)"></li>
-          <li class="nl__item nl__item_pass" v-on:mouseover="setView('My password is', person.login.password)"></li>
+          <li class="nl__item nl__item_email"
+              :class="{'active':(activeTab === email)}"
+              v-on:mouseover="setView(email, person.email)"></li>
+          <li class="nl__item nl__item_dob"
+              :class="{'active':(activeTab === dob)}"
+              v-on:mouseover="setView(dob, person.dob.date.split('').splice(0, 10).join('').replace(/-/g, '/'))"></li>
+          <li class="nl__item nl__item_address"
+              :class="{'active':(activeTab === address)}"
+              v-on:mouseover="setView(address, person.location.street.number + ' ' + person.location.street.name)"></li>
+          <li class="nl__item nl__item_phone"
+              :class="{'active':(activeTab === phone)}"
+              v-on:mouseover="setView(phone, person.phone)"></li>
+          <li class="nl__item nl__item_pass"
+              :class="{'active':(activeTab === pass)}"
+              v-on:mouseover="setView(pass, person.login.password)"></li>
         </ul>
       </nav>
     </div>
@@ -31,28 +46,39 @@
       <nuxt-link to="/" class="btn actions__btn">Home</nuxt-link>
       <a @click="goBack" class="btn actions__btn">Go back</a>
     </div>
+
   </section>
 </template>
 
 <script>
   export default {
-    async asyncData({$axios, params}) {
-      const data = await $axios.$get('https://randomuser.me/api/?page=1&results=10&seed=abc')
-      const user = data.results.filter(person => person.name.title + person.name.first + person.name.last === params.id)
-      return {user}
+    async asyncData({store, params}) {
+      const user = store.getters['users/users'].filter(person => person.name.title + person.name.first + person.name.last === params.id)
+      const description = user[0].name.first + ' ' + user[0].name.last
+      const title = 'Hi my name is'
+      const activeTab = name
+      return {user, description, title, activeTab}
     },
     methods: {
       goBack() {
         this.$router.back();
       },
-      setView(i, o) {
-        this.title = i;
-        this.description = o;
+      setView(t, d) {
+        this.title = t;
+        this.description = d;
+        this.activeTab = t;
+      },
+      showDetails() {
+        alert(`My email is ${this.user[0].email}\nGender is ${this.user[0].gender}\nAge is ${this.user[0].dob.age}`)
       }
     },
     data: () => ({
-      title: String,
-      description: String,
+      name: 'Hi, my name is',
+      email: 'My email address is',
+      dob: 'My birthday is',
+      address: 'My address is',
+      phone: 'My phone number is',
+      pass: 'My password is'
     }),
   }
 </script>
@@ -65,16 +91,17 @@
     justify-content: space-around;
   }
 
-  .actions__btn{
+  .actions__btn {
     background-color: rgba(0, 0, 0, 0.15);
     border-radius: 3px;
   }
 
   .personCard {
-    margin-top: 20px;
+    margin: 20px auto 0;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 5px;
     overflow: hidden;
+    width: 730px;
   }
 
   .personCard__nav {
@@ -82,10 +109,12 @@
     justify-content: center;
   }
 
+
   .nl {
     display: flex;
     float: left;
   }
+
   .nl__item {
     cursor: pointer;
     display: block;
@@ -93,34 +122,39 @@
     height: 48px;
     float: left;
     margin: 20px;
-    background-image: url(/card_icons.png);
+    background-image: url("/card_icons.png");
     background-size: 378px;
-    background-position-y: -48px;
     transition: all .35s ease-out;
+    background-position-y: 48px;
   }
 
-  .nl__item_name {
+  .nl__item:hover {
+    background-position-y: 0;
+  }
 
+  .active {
+    background-position-y: 0;
   }
 
   .nl__item_email {
-
+    background-position-x: -68px;
   }
 
   .nl__item_dob {
+    background-position-x: -136px;
 
   }
 
   .nl__item_address {
-
+    background-position-x: -204px;
   }
 
   .nl__item_phone {
-
+    background-position-x: -272px;
   }
 
   .nl__item_pass {
-
+    background-position-x: -340px;
   }
 
   .personCard__details {
@@ -168,6 +202,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
 
 </style>
