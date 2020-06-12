@@ -83,17 +83,16 @@
   }
 </script>
 
-<style>
+<style lang="scss">
   .actions {
     width: 200px;
     margin: 20px auto;
     display: flex;
     justify-content: space-around;
-  }
-
-  .actions__btn {
-    background-color: rgba(0, 0, 0, 0.15);
-    border-radius: 3px;
+    &__btn {
+      background-color: rgba(0, 0, 0, 0.15);
+      border-radius: 3px;
+    }
   }
 
   .personCard {
@@ -102,107 +101,91 @@
     border-radius: 5px;
     overflow: hidden;
     width: 730px;
-  }
+    &__header {
+      display: flex;
+      justify-content: center;
+      height: 131px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+      background-color: #f9f9f9;
+      &_img {
+        border-radius: 50%;
+        overflow: hidden;
+        width: 150px;
+        height: 150px;
+        &_wrap {
+          margin-top: 20px;
+          border: 1px solid rgba(0, 0, 0, 0.25);
+          width: 160px;
+          height: 160px;
+          background-color: white;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+        }
+      }
+    }
+    &__nav {
+      display: flex;
+      justify-content: center;
+    }
+    &__details {
+      margin-top: 70px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: Ubuntu, sans-serif;
+      &_title {
+        color: #999;
+        font-size: 18px;
+        margin: 0;
+      }
+      &_description {
+        color: #2c2e31;
+        font-size: 38px;
+        margin: 5px;
+      }
+    }
 
-  .personCard__nav {
-    display: flex;
-    justify-content: center;
   }
-
 
   .nl {
     display: flex;
     float: left;
-  }
-
-  .nl__item {
-    cursor: pointer;
-    display: block;
-    width: 40px;
-    height: 48px;
-    float: left;
-    margin: 20px;
-    background-image: url("/card_icons.png");
-    background-size: 378px;
-    transition: all .35s ease-out;
-    background-position-y: 48px;
-  }
-
-  .nl__item:hover {
-    background-position-y: 0;
+    &__item {
+      cursor: pointer;
+      display: block;
+      width: 40px;
+      height: 48px;
+      float: left;
+      margin: 20px;
+      background-image: url("/card_icons.png");
+      background-size: 378px;
+      transition: all .35s ease-out;
+      background-position-y: 48px;
+      &:hover {
+        background-position-y: 0;
+      }
+      &_email {
+        background-position-x: -68px;
+      }
+      &_dob {
+        background-position-x: -136px;
+      }
+      &_address {
+        background-position-x: -204px;
+      }
+      &_phone {
+        background-position-x: -272px;
+      }
+      &_pass {
+        background-position-x: -340px;
+      }
+    }
   }
 
   .active {
     background-position-y: 0;
   }
-
-  .nl__item_email {
-    background-position-x: -68px;
-  }
-
-  .nl__item_dob {
-    background-position-x: -136px;
-
-  }
-
-  .nl__item_address {
-    background-position-x: -204px;
-  }
-
-  .nl__item_phone {
-    background-position-x: -272px;
-  }
-
-  .nl__item_pass {
-    background-position-x: -340px;
-  }
-
-  .personCard__details {
-    margin-top: 70px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: Ubuntu, sans-serif;
-  }
-
-  .personCard__details_title {
-    color: #999;
-    font-size: 18px;
-    margin: 0;
-  }
-
-  .personCard__details_description {
-    color: #2c2e31;
-    font-size: 38px;
-    margin: 5px;
-  }
-
-  .personCard__header {
-    display: flex;
-    justify-content: center;
-    height: 131px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-    background-color: #f9f9f9;
-  }
-
-  .personCard__header_img {
-    border-radius: 50%;
-    overflow: hidden;
-    width: 150px;
-    height: 150px;
-  }
-
-  .personCard__header_img_wrap {
-    margin-top: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.25);
-    width: 160px;
-    height: 160px;
-    background-color: white;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-  }
-
 </style>
