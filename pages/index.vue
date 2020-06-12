@@ -8,7 +8,7 @@
       <li class="list-group-item">Vuex.JS</li>
       <li class="list-group-item">Nuxt.JS</li>
       <li class="list-group-item">SASS</li>
-      <li class="list-group-item">SSR</li>
+      <li class="list-group-item">Server Side Rendering</li>
       <li class="list-group-item">BEM</li>
     </ul>
     <br>
