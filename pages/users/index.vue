@@ -56,8 +56,6 @@
       defineLoadMore() {
         this.$store.commit('users/setCount', {count: this.count + this.initialCount})
         this.$store.dispatch('users/fetch')
-        console.log(this.count)
-        console.log(this.usersQty)
       },
       defineNextPage() {
         this.$store.commit('users/setCount', {count: this.initialCount})
